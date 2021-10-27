@@ -8,9 +8,7 @@ function getWordInput(event: Event): void {
 }
 
 function vowelCountByInput(word: string): number {
-    let wordFilter: number;
-
-    wordFilter = word.replace(/[^aeiou]/gi, '').length;
+    const wordFilter: number = word.replace(/[^aeiou]/gi, '').length;
 
     return wordFilter;
 }
