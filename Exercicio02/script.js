@@ -22,41 +22,41 @@ var lista = [
 ];
 //(a)
 var getBioByIdFunctional = function (id, list) {
-    var bioCheck = list.find(function (item) { return item.id === id; });
+    var bioCheck = list.find(function (person) { return person.id === id; });
     if (bioCheck)
         return bioCheck.bio;
     else
-        return null;
+        return undefined;
 };
 var getBioByIdImperative = function (id, list) {
     for (var i = 0; i < list.length; i++) {
         if (list[i].id === id)
             return list[i].bio;
     }
-    return null;
+    return undefined;
 };
 //(b)
 var getNameByIdFunctional = function (id, list) {
-    var nameCheck = list.find(function (item) { return item.id === id; });
+    var nameCheck = list.find(function (person) { return person.id === id; });
     if (nameCheck)
         return nameCheck.name;
     else
-        return null;
+        return undefined;
 };
 var getNameByIdImperative = function (id, list) {
     for (var i = 0; i < list.length; i++) {
         if (list[i].id === id)
             return list[i].name;
     }
-    return null;
+    return undefined;
 };
 //(c)
 var deleteByIdFunctional = function (id, list) {
-    var newList = list.map(function (item, index) {
-        if (item.id === id)
+    list.filter(function (person, index) {
+        if (person.id === id)
             list.splice(index, 1);
     });
-    return newList;
+    return list;
 };
 var deleteByIdImperative = function (id, list) {
     for (var i = 0; i < list.length; i++) {
@@ -66,21 +66,27 @@ var deleteByIdImperative = function (id, list) {
 };
 //(d)
 var updateByIdFunctional = function (id, list, name, bio) {
-    var index = list.findIndex(function (item) { return item["id"] === id; });
-    var nameList = list[index]["name"] = name;
-    var bioList = list[index]["bio"] = bio;
-    name ? nameList : null;
-    bio ? bioList : null;
+    var index = list.findIndex(function (person) { return person["id"] === id; });
+    if (index == -1) {
+        console.log("Id doesn't exist, so list can't be updated.");
+    }
+    else {
+        var nameList = list[index]["name"] = name;
+        var bioList = list[index]["bio"] = bio;
+        name ? nameList : undefined;
+        bio ? bioList : undefined;
+    }
 };
-var updateByIdImperative = function (id, list, input, valueItem) {
+var updateByIdImperative = function (id, list, input, valuePerson) {
     for (var i = 0; i < list.length; i++) {
         if (list[i].id === id) {
             if (input === 'name')
-                return list[i].name = valueItem;
+                return list[i].name = valuePerson;
             else if (input === 'bio')
-                return list[i].bio = valueItem;
+                return list[i].bio = valuePerson;
         }
     }
+    console.log("Id doesn't exist, so list can't be updated.");
 };
 //testes
 //(a)
@@ -93,20 +99,22 @@ console.log("(B) Name By Id Functional1: " + getNameByIdFunctional(2, lista));
 console.log("(B) Name By Id Functional2: " + getNameByIdFunctional(5, lista));
 console.log("(B) Name By Id Imperative1: " + getNameByIdImperative(1, lista));
 console.log("(B) Name By Id Imperative1: " + getNameByIdImperative(5, lista));
-//(d)
-var updateList = {
-    name: "lovelace ada",
-    bio: "alterado"
-};
-updateByIdFunctional(1, lista, "liv novo", "bio alterada");
-updateByIdImperative(2, lista, 'name', 'Novo Nomeeeee');
-updateByIdImperative(2, lista, 'bio', 'Bio nova aksjhdkajshdkjashkdjhqowique');
-console.log("(D) Update Functional id1: ");
-console.log("(D) Update Imperative id2: ");
-console.log(lista);
 //(c)
-deleteByIdFunctional(2, lista);
-deleteByIdImperative(1, lista);
-console.log("(C) Delete By Id Functional id2: ");
-console.log("(C) Delete By Id Imperative id1: ");
+console.log("(C) Delete By Id Functional id5: ");
+deleteByIdFunctional(5, lista);
+console.log("(C) Delete By Id Imperative id2: ");
+deleteByIdImperative(2, lista);
+console.log(lista);
+//(d)
+console.log("(D) Update Functional id2: ");
+updateByIdFunctional(2, lista, "liv novo", "bio alterada");
+console.log("(D) Update Functional id1: ");
+updateByIdFunctional(1, lista, "liv novo", "bio alterada");
+console.log(getNameByIdFunctional(1, lista));
+console.log(getBioByIdFunctional(1, lista));
+console.log("(D) Update Imperative id3: ");
+updateByIdImperative(3, lista, 'name', 'Novo Nomeeeee');
+console.log(getNameByIdImperative(3, lista));
+console.log("(D) Update Imperative id2: ");
+updateByIdImperative(2, lista, 'bio', 'Bio nova aksjhdkajshdkjashkdjhqowique');
 console.log(lista);
