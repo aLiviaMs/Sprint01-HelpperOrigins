@@ -1,4 +1,4 @@
-let lista: Array<Object> = [
+const lista: Array<Person> = [
     {
         id: 1,
         name: "Ada Lovelace",
@@ -21,65 +21,59 @@ let lista: Array<Object> = [
     },
 ];
 
-type Item = {
+type Person = {
     id: number,
     name: string,
     bio: string
 }
 
-type UpdateListFunctional = {
-    name?: string,
-    bio?: string
-}
-
 //(a)
-const getBioByIdFunctional = (id: number, list: Array<Item>): string => {
-    const bioCheck: Item = list.find(item => item.id === id);
+const getBioByIdFunctional = (id: number, list: Array<Person>): string | undefined => {
+    const bioCheck: Person = list.find(person => person.id === id);
 
     if (bioCheck)
         return bioCheck.bio;
     else
-        return null;
+        return undefined;
 }
 
-const getBioByIdImperative = (id: number, list: Array<Item>): string => {
+const getBioByIdImperative = (id: number, list: Array<Person>): string | undefined => {
     for (let i = 0; i < list.length; i++) {
         if (list[i].id === id)
             return list[i].bio;
     }
-    return null;
+    return undefined;
 };
 
 //(b)
-const getNameByIdFunctional = (id: number, list: Array<Item>): string => {
-    const nameCheck: Item = list.find(item => item.id === id);
+const getNameByIdFunctional = (id: number, list: Array<Person>): string | undefined => {
+    const nameCheck: Person = list.find(person => person.id === id);
 
     if (nameCheck)
         return nameCheck.name;
     else
-        return null;
+        return undefined;
 }
 
-const getNameByIdImperative = (id: number, list: Array<Item>): string => {
+const getNameByIdImperative = (id: number, list: Array<Person>): string | undefined => {
     for (let i = 0; i < list.length; i++) {
         if (list[i].id === id)
             return list[i].name;
     }
-    return null;
+    return undefined;
 }
 
 //(c)
-const deleteByIdFunctional = (id: number, list: Array<Item>): Array<Item> => {
-
-    const newList: any = list.map((item, index) => {
-        if (item.id === id)
+const deleteByIdFunctional = (id: number, list: Array<Person>): Array<Person> => {
+    list.filter((person, index) => {
+        if (person.id === id)
             list.splice(index, 1);
     })
 
-    return newList;
+    return list;
 }
 
-const deleteByIdImperative = (id: number, list: Array<Item>): void => {
+const deleteByIdImperative = (id: number, list: Array<Person>): void => {
     for (let i = 0; i < list.length; i++) {
         if (list[i].id == id)
             list.splice(i, 1);
@@ -87,61 +81,67 @@ const deleteByIdImperative = (id: number, list: Array<Item>): void => {
 }
 
 //(d)
-const updateByIdFunctional = (id: number, list: Array<Item>, name?: string, bio?: string): void => {
-    const index = list.findIndex(item => item["id"] === id);
-    const nameList = list[index]["name"] = name;
-    const bioList = list[index]["bio"] = bio;
+const updateByIdFunctional = (id: number, list: Array<Person>, name?: string, bio?: string): void => {
+    const index = list.findIndex(person => person["id"] === id);
 
-    name ? nameList : null;
-    bio ? bioList : null;
+    if (index == -1) {
+        console.log("Id doesn't exist, so list can't be updated.");
+    } else {
+        const nameList = list[index]["name"] = name;
+        const bioList = list[index]["bio"] = bio;
+
+        name ? nameList : undefined;
+        bio ? bioList : undefined;
+    }
 }
 
-const updateByIdImperative = (id: number, list: Array<Item>, input: string, valueItem: string): string => {
+const updateByIdImperative = (id: number, list: Array<Person>, input: string, valuePerson: string): string | undefined => {
     for (let i = 0; i < list.length; i++) {
         if (list[i].id === id) {
             if (input === 'name')
-                return list[i].name = valueItem;
+                return list[i].name = valuePerson;
             else if (input === 'bio')
-                return list[i].bio = valueItem;
+                return list[i].bio = valuePerson;
         }
     }
+    console.log("Id doesn't exist, so list can't be updated.");
 }
 
 
 //testes
 
 //(a)
-console.log("(A) Bio By Id Functional1: " + getBioByIdFunctional(1, lista as Item[]));
-console.log("(A) Bio By Id Functional2: " + getBioByIdFunctional(5, lista as Item[]));
-console.log("(A) Bio By Id Imperative1: " + getBioByIdImperative(3, lista as Item[]));
-console.log("(A) Bio By Id Imperative2: " + getBioByIdImperative(5, lista as Item[]));
+console.log("(A) Bio By Id Functional1: " + getBioByIdFunctional(1, lista as Person[]));
+console.log("(A) Bio By Id Functional2: " + getBioByIdFunctional(5, lista as Person[]));
+console.log("(A) Bio By Id Imperative1: " + getBioByIdImperative(3, lista as Person[]));
+console.log("(A) Bio By Id Imperative2: " + getBioByIdImperative(5, lista as Person[]));
 
 //(b)
-console.log("(B) Name By Id Functional1: " + getNameByIdFunctional(2, lista as Item[]));
-console.log("(B) Name By Id Functional2: " + getNameByIdFunctional(5, lista as Item[]));
-console.log("(B) Name By Id Imperative1: " + getNameByIdImperative(1, lista as Item[]));
-console.log("(B) Name By Id Imperative1: " + getNameByIdImperative(5, lista as Item[]));
-
-//(d)
-const updateList: UpdateListFunctional = {
-    name: "lovelace ada",
-    bio: "alterado",
-};
-
-updateByIdFunctional(1, lista as Item[], "liv novo", "bio alterada");
-
-updateByIdImperative(2, lista as Item[], 'name', 'Novo Nomeeeee');
-updateByIdImperative(2, lista as Item[], 'bio', 'Bio nova aksjhdkajshdkjashkdjhqowique');
-
-console.log("(D) Update Functional id1: ");
-console.log("(D) Update Imperative id2: ");
-console.log(lista as Item[]);
-
-
+console.log("(B) Name By Id Functional1: " + getNameByIdFunctional(2, lista as Person[]));
+console.log("(B) Name By Id Functional2: " + getNameByIdFunctional(5, lista as Person[]));
+console.log("(B) Name By Id Imperative1: " + getNameByIdImperative(1, lista as Person[]));
+console.log("(B) Name By Id Imperative1: " + getNameByIdImperative(5, lista as Person[]));
 
 //(c)
-deleteByIdFunctional(2, lista as Item[]);
-deleteByIdImperative(1, lista as Item[]);
-console.log("(C) Delete By Id Functional id2: ");
-console.log("(C) Delete By Id Imperative id1: ");
-console.log(lista as Item[]);
+console.log("(C) Delete By Id Functional id5: ");
+deleteByIdFunctional(5, lista as Person[]);
+
+console.log("(C) Delete By Id Imperative id2: ");
+deleteByIdImperative(2, lista as Person[]);
+console.log(lista as Person[]);
+
+//(d)
+console.log("(D) Update Functional id2: ");
+updateByIdFunctional(2, lista as Person[], "liv novo", "bio alterada");
+console.log("(D) Update Functional id1: ");
+updateByIdFunctional(1, lista as Person[], "liv novo", "bio alterada");
+console.log(getNameByIdFunctional(1, lista as Person[]));
+console.log(getBioByIdFunctional(1, lista as Person[]));
+
+console.log("(D) Update Imperative id3: ");
+updateByIdImperative(3, lista as Person[], 'name', 'Novo Nomeeeee');
+console.log(getNameByIdImperative(3, lista as Person[]));
+
+console.log("(D) Update Imperative id2: ");
+updateByIdImperative(2, lista as Person[], 'bio', 'Bio nova aksjhdkajshdkjashkdjhqowique');
+console.log(lista as Person[]);
