@@ -93,12 +93,6 @@ console.log("(B) Name By Id Functional1: " + getNameByIdFunctional(2, lista));
 console.log("(B) Name By Id Functional2: " + getNameByIdFunctional(5, lista));
 console.log("(B) Name By Id Imperative1: " + getNameByIdImperative(1, lista));
 console.log("(B) Name By Id Imperative1: " + getNameByIdImperative(5, lista));
-//(c)
-deleteByIdFunctional(3, lista);
-deleteByIdImperative(4, lista);
-console.log("(C) Delete By Id Functional id3: ");
-console.log("(C) Delete By Id Imperative id4: ");
-console.log(lista);
 //(d)
 var updateList = {
     name: "lovelace ada",
@@ -109,4 +103,10 @@ updateByIdImperative(2, lista, 'name', 'Novo Nomeeeee');
 updateByIdImperative(2, lista, 'bio', 'Bio nova aksjhdkajshdkjashkdjhqowique');
 console.log("(D) Update Functional id1: ");
 console.log("(D) Update Imperative id2: ");
+console.log(lista);
+//(c)
+deleteByIdFunctional(2, lista);
+deleteByIdImperative(1, lista);
+console.log("(C) Delete By Id Functional id2: ");
+console.log("(C) Delete By Id Imperative id1: ");
 console.log(lista);
