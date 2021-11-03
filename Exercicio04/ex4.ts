@@ -35,15 +35,15 @@ type UpdateInfos = {
 
 //Cria tabela e renderiza para o HTML
 const createTable = (person: Person): HTMLElement => {
-    const personTr: HTMLElement = document.createElement("tr");
+    const personTr: HTMLTableRowElement = document.createElement("tr");
 
-    const idTd: HTMLElement = document.createElement("td");
+    const idTd: HTMLTableCellElement = document.createElement("td");
     idTd.innerText = person.id.toString();
 
-    const nameTd: HTMLElement = document.createElement("td");
+    const nameTd: HTMLTableCellElement = document.createElement("td");
     nameTd.innerText = person.name;
 
-    const bioTd: HTMLElement = document.createElement("td");
+    const bioTd: HTMLTableCellElement = document.createElement("td");
     bioTd.innerText = person.bio;
 
     const btnDelete: HTMLButtonElement = document.createElement("button");
@@ -70,7 +70,7 @@ const loadTable = (list: Array<Person>): void => {
     const table: HTMLTableElement = document.querySelector("#table") as HTMLTableElement;
 
     table.innerHTML = "";
-    const tableTrs = list.map(createTable);
+    const tableTrs: HTMLElement[] = list.map(createTable);
 
     tableTrs.forEach((personTr: HTMLElement) => table.appendChild(personTr));
 }
@@ -79,16 +79,16 @@ const updateTheForm = (id: number): void => {
     const container: HTMLDivElement = document.querySelector(
         "#form-container"
     ) as HTMLDivElement;
-    const updateForm = document.createElement("form");
+    const updateForm: HTMLFormElement = document.createElement("form");
 
-    const nameInput = document.createElement("input");
+    const nameInput: HTMLInputElement = document.createElement("input");
     nameInput.className = "input-name"
     nameInput.placeholder = "Insira novo nome aqui";
 
-    const bioInput = document.createElement("input");
+    const bioInput: HTMLInputElement = document.createElement("input");
     bioInput.placeholder = "Insira nova bio aqui";
 
-    const submitButton = document.createElement("button");
+    const submitButton: HTMLButtonElement = document.createElement("button");
     submitButton.innerText = "Atualizar";
     submitButton.type = "submit";
 
@@ -102,9 +102,6 @@ const updateTheForm = (id: number): void => {
     }));
 
     container.appendChild(updateForm);
-
-    console.log(updateForm);
-    console.log(container);
 }
 
 const actionSubmit = (event: Event, id: number, updateInfo: UpdateInfos): void => {
@@ -116,8 +113,6 @@ const actionSubmit = (event: Event, id: number, updateInfo: UpdateInfos): void =
 
     containerForm.innerHTML = '';
     loadTable(lista);
-
-    console.log(updateInfo);
 }
 
 const deleteId = (id: number): void => {
@@ -140,7 +135,7 @@ const getNameById = (id: number, list: Array<Person>): string => {
 }
 
 const removePerson = (id: number, list: Array<Person>): Array<Person> => {
-    const listRemoveId = list.filter((person: Person) => person.id !== id);
+    const listRemoveId: Array<Person> = list.filter((person: Person) => person.id !== id);
     return listRemoveId;
 }
 

@@ -80,8 +80,6 @@ var updateTheForm = function (id) {
         bio: bioInput.value
     }); });
     container.appendChild(updateForm);
-    console.log(updateForm);
-    console.log(container);
 };
 var actionSubmit = function (event, id, updateInfo) {
     event.preventDefault();
@@ -89,7 +87,6 @@ var actionSubmit = function (event, id, updateInfo) {
     var containerForm = document.querySelector("#form-container");
     containerForm.innerHTML = '';
     loadTable(lista);
-    console.log(updateInfo);
 };
 var deleteId = function (id) {
     lista = removePerson(id, lista);
