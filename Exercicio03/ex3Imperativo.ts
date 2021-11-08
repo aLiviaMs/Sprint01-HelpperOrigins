@@ -21,8 +21,7 @@ const getListImperativo = (list: Array<any>): Array<number> | string | boolean =
         meanNumber = sum / list.length;
 
 
-        const results: Array<number> = [maxNumber, minNumber, meanNumber];
-        return results
+        return [maxNumber, minNumber, meanNumber];
     } else {
         return "Lista vazia ou possui um objeto diferente do tipo numérico.";
     }
