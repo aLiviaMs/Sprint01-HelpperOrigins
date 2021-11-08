@@ -2,22 +2,22 @@ var lista = [
     {
         id: 1,
         name: "Ada Lovelace",
-        bio: "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina"
+        bio: "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina",
     },
     {
         id: 2,
         name: "Alan Turing",
-        bio: "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia"
+        bio: "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia",
     },
     {
         id: 3,
         name: "Nikola Tesla",
-        bio: "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."
+        bio: "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada.",
     },
     {
         id: 4,
         name: "Nicolau Copérnico",
-        bio: "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."
+        bio: "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar.",
     },
 ];
 //(a)
@@ -51,12 +51,8 @@ var getNameByIdImperative = function (id, list) {
     return undefined;
 };
 //(c)
-var deleteByIdFunctional = function (id, list) {
-    list.filter(function (person, index) {
-        if (person.id === id)
-            list.splice(index, 1);
-    });
-    return list;
+var deleteByIdFunctional = function (id) {
+    return lista.filter(function (person) { return person.id !== id; });
 };
 var deleteByIdImperative = function (id, list) {
     for (var i = 0; i < list.length; i++) {
@@ -100,8 +96,8 @@ console.log("(B) Name By Id Functional2: " + getNameByIdFunctional(5, lista));
 console.log("(B) Name By Id Imperative1: " + getNameByIdImperative(1, lista));
 console.log("(B) Name By Id Imperative1: " + getNameByIdImperative(5, lista));
 //(c)
-console.log("(C) Delete By Id Functional id5: ");
-deleteByIdFunctional(5, lista);
+console.log("(C) Delete By Id Functional id4: ");
+deleteByIdFunctional(4);
 console.log("(C) Delete By Id Imperative id2: ");
 deleteByIdImperative(2, lista);
 console.log(lista);
