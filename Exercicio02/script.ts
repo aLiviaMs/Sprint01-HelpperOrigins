@@ -64,13 +64,8 @@ const getNameByIdImperative = (id: number, list: Array<Person>): string | undefi
 }
 
 //(c)
-const deleteByIdFunctional = (id: number, list: Array<Person>): Array<Person> => {
-    list.filter((person, index) => {
-        if (person.id === id)
-            list.splice(index, 1);
-    })
-
-    return list;
+const deleteByIdFunctional = (id: number): Array<Person> => {
+    return lista.filter((person: Person) => person.id !== id);
 }
 
 const deleteByIdImperative = (id: number, list: Array<Person>): void => {
@@ -82,13 +77,13 @@ const deleteByIdImperative = (id: number, list: Array<Person>): void => {
 
 //(d)
 const updateByIdFunctional = (id: number, list: Array<Person>, name?: string, bio?: string): void => {
-    const index = list.findIndex(person => person["id"] === id);
+    const index: number = list.findIndex(person => person["id"] === id);
 
     if (index == -1) {
         console.log("Id doesn't exist, so list can't be updated.");
     } else {
-        const nameList = list[index]["name"] = name;
-        const bioList = list[index]["bio"] = bio;
+        const nameList: string = list[index]["name"] = name;
+        const bioList: string = list[index]["bio"] = bio;
 
         name ? nameList : undefined;
         bio ? bioList : undefined;
@@ -123,8 +118,8 @@ console.log("(B) Name By Id Imperative1: " + getNameByIdImperative(1, lista as P
 console.log("(B) Name By Id Imperative1: " + getNameByIdImperative(5, lista as Person[]));
 
 //(c)
-console.log("(C) Delete By Id Functional id5: ");
-deleteByIdFunctional(5, lista as Person[]);
+console.log("(C) Delete By Id Functional id4: ");
+deleteByIdFunctional(4);
 
 console.log("(C) Delete By Id Imperative id2: ");
 deleteByIdImperative(2, lista as Person[]);
