@@ -9,9 +9,7 @@ const getListFunctional = (list: Array<any>): Array<number> | string => {
 
         const meanNumber = (list: Array<number>) => list.reduce((previous: number, current: number) => previous + current) / list.length;
 
-        const results: Array<number> = [maxNumber, minNumber, meanNumber(list)];
-
-        return results;
+        return [maxNumber, minNumber, meanNumber(list)];
     } else {
         return 'Lista vazia ou possui um objeto diferente do tipo numérico.';
     }
